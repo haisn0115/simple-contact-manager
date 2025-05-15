@@ -19,12 +19,57 @@ namespace Simple_Contact_Manager
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            string name = txtName.Text;
-            string phone = txtPhone.Text;
+            string name = txtName.Text.Trim();
+            string phone = txtPhone.Text.Trim();
 
-            // Bug: Doesn't check if fields are empty
-            // Bug: Accepts invalid phone number
+            if (name == "" || phone == "")
+            {
+                MessageBox.Show("Name and phone number cannot be empty.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            long dummy;
+            if (!long.TryParse(phone, out dummy))
+            {
+                MessageBox.Show("Phone number must be numeric.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             lstDisplay.Items.Add(name + " - " + phone);
+
         }
+
+        private void txtPhone_TextChanged(object sender, EventArgs e)
+        {
+            // Optional: Add logic if needed
+        }
+
+
+
+
+        private void txtPhone_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Allow only digits and control keys (e.g., backspace)
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Block the key press
+            }
+           
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            txtName.Clear();
+            txtPhone.Clear();
+            txtName.Focus();
+        }
+
+        // clear fields after adding
+    
     }
 }
+
+        
+    
+    
+
