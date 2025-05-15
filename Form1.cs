@@ -56,15 +56,21 @@ namespace Simple_Contact_Manager
             }
            
         }
-
+        // clear field
         private void button1_Click(object sender, EventArgs e)
         {
             txtName.Clear();
             txtPhone.Clear();
-            txtName.Focus();
+            
         }
 
-        // clear fields after adding
+        // delete fields
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (lstDisplay.SelectedItem != null) lstDisplay.Items.Remove(lstDisplay.SelectedItem);
+            else MessageBox.Show("Select a contact to delete.", "Delete Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
     
     }
 }
